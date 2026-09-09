@@ -1,0 +1,38 @@
+name: Publish release to Figshare
+on:
+  release:
+    types: [published]
+permissions:
+  contents: write
+concurrency:
+  group: figshare-33472651
+  cancel-in-progress: false
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/check_source_coefficient_majorants.py
+      - run: python scripts/check_publication.py
+      - run: python scripts/test_figshare_upload.py
+      - run: python scripts/test_figshare_release.py
+      - name: Install LaTeX
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended lmodern
+      - name: Build manuscript from the released source
+        run: python scripts/build.py
+      - name: Upload, publish, and verify Figshare version
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+        run: python scripts/figshare_release.py
+      - name: Attach DOI receipt to GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$RELEASE_TAG" tmp/figshare-release/figshare-receipt.json --clobber

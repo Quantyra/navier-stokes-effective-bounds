@@ -13,6 +13,7 @@ jobs:
       - run: python scripts/check_source_coefficient_majorants.py
       - run: python scripts/check_publication.py
       - run: python scripts/test_figshare_upload.py
+      - run: python scripts/test_figshare_release.py
       - name: Install LaTeX
         run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended lmodern
       - run: python scripts/build.py

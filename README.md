@@ -32,6 +32,8 @@ Published Figshare record: **[10.6084/m9.figshare.33472651](https://doi.org/10.6
 
 Figshare version 2 stores the manuscript PDF and a source ZIP of commit `35b102c2ea7b47aef091f232132f81d69e68348c`. Both public downloads were verified: the PDF is byte-identical to the manuscript, and all ZIP entries match that commit. Later citation/status updates on GitHub are outside that frozen snapshot. See [the publication receipt](evidence/figshare-publication.json) and [API workflow](FIGSHARE.md). Version 1 was a link-only record. No GitHub release or Zenodo deposit has been created.
 
+**Future GitHub releases automatically publish a corresponding Figshare version.** The release workflow builds and verifies the manuscript and source archive, publishes them, and attaches a DOI receipt to the GitHub release. Ordinary commits do not publish. See [release behavior and retry handling](FIGSHARE.md#automatic-github-releases).
+
 ## Evidence
 
 The `evidence/` directory preserves seven original research/review records byte for byte from a fixed source commit. These are historical supporting records, not additional publication claims. Their old workstream labels and references to other research notes are retained for provenance; only the three mathematical records listed in [the evidence guide](evidence/README.md) are dependencies of this note.
