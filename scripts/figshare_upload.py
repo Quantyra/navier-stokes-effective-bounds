@@ -127,6 +127,17 @@ def main():
     subprocess.run(['git', 'archive', '--format=zip',
                     '--prefix=navier-stokes-effective-bounds/', '-o', str(archive), revision],
                    cwd=ROOT, check=True)
+    # Figshare rejects mixing link-only entries and actual uploaded files.
+    # Replace only this known repository link in the editable draft.
+    current = client.request('GET', ITEM)
+    links = [f for f in current['files'] if f.get('is_link_only')]
+    if links:
+        if (len(current['files']) != 1 or len(links) != 1
+                or links[0].get('download_url') != 'https://github.com/Quantyra/navier-stokes-effective-bounds'
+                or links[0].get('id') != 68331139):
+            raise RuntimeError('Unexpected link-only entries; inspect draft before replacing')
+        client.request('DELETE', ITEM + '/files/68331139')
+        print('Replaced the known link-only entry in the editable draft; public v1 is unchanged.')
     for path in (pdf, archive):
         upload(client, path)
     summary = ('Figshare item 33472651: PDF and source ZIP verified in draft.\n'
