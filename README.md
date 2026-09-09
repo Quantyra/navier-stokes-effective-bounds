@@ -28,9 +28,9 @@ The arithmetic checks support the written arguments; they do not formally verify
 
 Author: **Daniel Fredriksen**, Quantyra. Prepared with OpenAI Codex assistance; see the manuscript disclosure. Version **0.1.0**. License: **Apache-2.0**, preserving the source repository's license.
 
-Published Figshare record: **[10.6084/m9.figshare.33472651](https://doi.org/10.6084/m9.figshare.33472651)**. Version 1: [10.6084/m9.figshare.33472651.v1](https://doi.org/10.6084/m9.figshare.33472651.v1).
+Published Figshare record: **[10.6084/m9.figshare.33472651](https://doi.org/10.6084/m9.figshare.33472651)**. Cite the archived files as version 2: **[10.6084/m9.figshare.33472651.v2](https://doi.org/10.6084/m9.figshare.33472651.v2)**.
 
-The verified Figshare version 1 contains a link to this repository; it does **not yet store the manuscript or source archive**. See [the Figshare upload handoff](FIGSHARE.md). GitHub continues to host the files. No GitHub release or Zenodo deposit has been created.
+Figshare version 2 stores the manuscript PDF and a source ZIP of commit `35b102c2ea7b47aef091f232132f81d69e68348c`. Both public downloads were verified: the PDF is byte-identical to the manuscript, and all ZIP entries match that commit. Later citation/status updates on GitHub are outside that frozen snapshot. See [the publication receipt](evidence/figshare-publication.json) and [API workflow](FIGSHARE.md). Version 1 was a link-only record. No GitHub release or Zenodo deposit has been created.
 
 ## Evidence
 

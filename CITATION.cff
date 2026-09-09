@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "Please cite the research note using the preferred citation below. The Figshare record currently links to this repository; archival file upload is pending."
+message: "Please cite the research note using the preferred citation below. Figshare version 2 archives the PDF and source snapshot identified in evidence/figshare-publication.json."
 type: software
 title: "Explicit Pressure and Local Contraction Bounds for a Forced Navier–Stokes Blow-Up Construction"
 authors:
@@ -13,7 +13,7 @@ repository-code: "https://github.com/Quantyra/navier-stokes-effective-bounds"
 license: Apache-2.0
 preferred-citation:
   type: article
-  doi: "10.6084/m9.figshare.33472651.v1"
+  doi: "10.6084/m9.figshare.33472651.v2"
   title: "Explicit Pressure and Local Contraction Bounds for a Forced Navier–Stokes Blow-Up Construction"
   authors:
     - family-names: Fredriksen
@@ -21,7 +21,7 @@ preferred-citation:
       affiliation: Quantyra
   year: 2026
   month: 9
-  url: "https://doi.org/10.6084/m9.figshare.33472651.v1"
+  url: "https://doi.org/10.6084/m9.figshare.33472651.v2"
 keywords:
   - Navier-Stokes
   - explicit estimates

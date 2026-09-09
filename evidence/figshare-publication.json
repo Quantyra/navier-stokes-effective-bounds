@@ -1,0 +1,47 @@
+{
+  "id": 33472651,
+  "doi": "10.6084/m9.figshare.33472651.v2",
+  "version": 2,
+  "published_date": "2026-09-09T03:54:07Z",
+  "url_public_html": "https://figshare.com/articles/preprint/Explicit_Pressure_and_Local_Contraction_Bounds_for_a_Forced_Navier_Stokes_Blow-Up_Construction/33472651",
+  "authors": [
+    {
+      "id": 24727504,
+      "full_name": "Daniel Fredriksen",
+      "first_name": "Daniel",
+      "last_name": "Fredriksen",
+      "is_active": true,
+      "url_name": "Daniel_Fredriksen",
+      "orcid_id": ""
+    }
+  ],
+  "license": {
+    "value": 7,
+    "name": "Apache 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+  },
+  "files": [
+    {
+      "id": 68331175,
+      "name": "effective-bounds.pdf",
+      "size": 414160,
+      "is_link_only": false,
+      "download_url": "https://ndownloader.figshare.com/files/68331175",
+      "supplied_md5": "f2cd675fdeda6881190388940d857324",
+      "computed_md5": "f2cd675fdeda6881190388940d857324",
+      "mimetype": "application/pdf"
+    },
+    {
+      "id": 68331181,
+      "name": "navier-stokes-effective-bounds-35b102c2ea7b.zip",
+      "size": 443954,
+      "is_link_only": false,
+      "download_url": "https://ndownloader.figshare.com/files/68331181",
+      "supplied_md5": "29f5351d0761bbf88cee2822d9b713cf",
+      "computed_md5": "29f5351d0761bbf88cee2822d9b713cf",
+      "mimetype": "application/zip"
+    }
+  ],
+  "source_commit": "35b102c2ea7b47aef091f232132f81d69e68348c",
+  "verification": "Public downloads checked: PDF byte-identical; every ZIP entry equals the named git commit. ZIP compression bytes may vary with git implementation."
+}
