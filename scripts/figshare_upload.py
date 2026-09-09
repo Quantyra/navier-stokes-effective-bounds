@@ -59,7 +59,14 @@ class Client:
             raise RuntimeError(f'Figshare {method} failed: HTTP {exc.code}: {message}') from None
         except urllib.error.URLError:
             raise RuntimeError('Figshare network request failed') from None
-        return json.loads(payload) if payload and not binary else None
+        if not payload or binary:
+            return None
+        try:
+            return json.loads(payload)
+        except ValueError:
+            if method != 'GET':
+                return None  # completion can return a non-JSON success body
+            raise RuntimeError(f'Unexpected non-JSON GET response from {parsed.hostname}') from None
 
 
 def checksum(path):
@@ -81,10 +88,15 @@ def upload(client, path):
         if len(same) == 1 and same[0].get('computed_md5') == digest and same[0]['size'] == size:
             print('Already verified:', path.name)
             return
-        raise RuntimeError(f'Existing filename differs or is incomplete: {path.name}; inspect draft')
-    result = client.request('POST', ITEM + '/files',
-                            {'name': path.name, 'size': size, 'md5': digest})
-    location = result['location']
+        if (len(same) == 1 and same[0].get('supplied_md5') == digest
+                and same[0].get('size') == size and not same[0].get('computed_md5')):
+            location = API + ITEM + '/files/' + str(same[0]['id'])
+        else:
+            raise RuntimeError(f'Existing filename differs: {path.name}; inspect draft')
+    else:
+        result = client.request('POST', ITEM + '/files',
+                                {'name': path.name, 'size': size, 'md5': digest})
+        location = result['location']
     if not location.startswith(API + ITEM + '/files/'):
         raise RuntimeError('Unexpected file-creation response')
     info = client.request('GET', location)
@@ -97,8 +109,9 @@ def upload(client, path):
             if start != offset or not start <= end < size:
                 raise RuntimeError('Invalid or incomplete upload part ranges')
             stream.seek(start)
-            client.request('PUT', info['upload_url'] + '/' + str(part['partNo']),
-                           stream.read(end - start + 1), binary=True)
+            if part.get('status') != 'COMPLETED':
+                client.request('PUT', info['upload_url'] + '/' + str(part['partNo']),
+                               stream.read(end - start + 1), binary=True)
             offset = end + 1
     if offset != size:
         raise RuntimeError('Upload parts do not cover the complete file')
