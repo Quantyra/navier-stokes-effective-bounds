@@ -2,6 +2,7 @@
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -49,8 +50,13 @@ class Client:
                     url, data=data, headers=headers, method=method), timeout=90) as response:
                 payload = response.read()
         except urllib.error.HTTPError as exc:
-            # Never echo response bodies or signed upload URLs into Actions logs.
-            raise RuntimeError(f'Figshare request failed: HTTP {exc.code}') from None
+            # Print only a sanitized service message, never bodies or signed URLs.
+            try:
+                message = str(json.loads(exc.read()).get('message', ''))
+            except (ValueError, AttributeError):
+                message = ''
+            message = re.sub(r'https?://\S+', '[URL]', message.replace(self.token, '[redacted]'))[:300]
+            raise RuntimeError(f'Figshare {method} failed: HTTP {exc.code}: {message}') from None
         except urllib.error.URLError:
             raise RuntimeError('Figshare network request failed') from None
         return json.loads(payload) if payload and not binary else None
