@@ -1,5 +1,7 @@
 # Zenodo handoff
 
+Superseded for this publication by the [Figshare handoff](FIGSHARE.md). The user published Figshare record `10.6084/m9.figshare.33472651`; do not create a second DOI through Zenodo for the same publication as part of this workflow. The instructions below are retained as the historical alternative.
+
 The repository is ready to connect to Zenodo. No DOI is reserved here and no GitHub release has been created.
 
 1. Sign into Zenodo and open the GitHub integration settings.

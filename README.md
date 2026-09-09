@@ -28,7 +28,9 @@ The arithmetic checks support the written arguments; they do not formally verify
 
 Author: **Daniel Fredriksen**, Quantyra. Prepared with OpenAI Codex assistance; see the manuscript disclosure. Version **0.1.0**. License: **Apache-2.0**, preserving the source repository's license.
 
-The repository is prepared for Zenodo integration. No DOI is assigned and no GitHub release has been published yet. See [the Zenodo handoff](ZENODO.md). The citation metadata deliberately contains no invented or placeholder DOI.
+Published Figshare record: **[10.6084/m9.figshare.33472651](https://doi.org/10.6084/m9.figshare.33472651)**. Version 1: [10.6084/m9.figshare.33472651.v1](https://doi.org/10.6084/m9.figshare.33472651.v1).
+
+The verified Figshare version 1 contains a link to this repository; it does **not yet store the manuscript or source archive**. See [the Figshare upload handoff](FIGSHARE.md). GitHub continues to host the files. No GitHub release or Zenodo deposit has been created.
 
 ## Evidence
 

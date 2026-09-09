@@ -1,0 +1,26 @@
+name: Upload files to Figshare draft
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: figshare-33472651
+  cancel-in-progress: false
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/check_source_coefficient_majorants.py
+      - run: python scripts/check_publication.py
+      - run: python scripts/test_figshare_upload.py
+      - name: Upload and verify files
+        env:
+          FIGSHARE_TOKEN: ${{ secrets.FIGSHARE_TOKEN }}
+        run: python scripts/figshare_upload.py
