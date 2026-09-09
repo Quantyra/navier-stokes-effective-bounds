@@ -1,0 +1,11 @@
+{
+  "title": "Explicit Pressure and Local Contraction Bounds for a Forced Navier–Stokes Blow-Up Construction",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "A conditional quantitative research note deriving explicit pressure majorants and a noncircular local contraction parameter rule for the leading axis problem in the September 2026 forced Navier–Stokes construction attributed to OpenAI. The source already supplies the local existence method. This note does not certify the completed field or establish a computational complexity result. Prepared with OpenAI Codex assistance; not independently human peer reviewed. Includes manuscript PDF, LaTeX source, exact arithmetic checks, and provenance records.",
+  "creators": [{"name": "Fredriksen, Daniel", "affiliation": "Quantyra"}],
+  "license": "Apache-2.0",
+  "version": "0.1.0",
+  "keywords": ["Navier-Stokes", "explicit estimates", "contraction mapping", "analytic coefficient spaces"],
+  "related_identifiers": [{"identifier": "https://github.com/Quantyra/navier-stokes-effective-bounds", "relation": "isSupplementTo", "scheme": "url"}]
+}

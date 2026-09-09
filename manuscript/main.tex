@@ -1,0 +1,443 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,longtable}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\hypersetup{pdftitle={Explicit Pressure and Local Contraction Bounds for a Forced Navier-Stokes Blow-Up Construction},pdfauthor={Daniel Fredriksen},pdfsubject={Conditional explicit estimates for a leading local analytic profile},pdfkeywords={Navier-Stokes, explicit bounds, contraction mapping}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert_\rho}
+\newcommand{\Av}{\mathcal A}
+\newcommand{\DY}{\mathcal D}
+\newcommand{\J}{\mathcal J}
+\newcommand{\Int}{\mathcal I}
+\title{Explicit Pressure and Local Contraction Bounds\\for a Forced Navier--Stokes Blow-Up Construction}
+\author{Daniel Fredriksen\\\small Quantyra}
+\date{September 8, 2026\\\small Research note, version 0.1.0}
+\begin{document}
+\maketitle
+\begin{abstract}
+We collect explicit sufficient bounds for two local components of the
+September 2026 forced Navier--Stokes construction attributed to OpenAI.
+An integrable envelope for its unbumped outer schedule gives pressure
+majorants $16\overline P^2$ and $128\overline P^2$ on a fixed complex rectangle.
+For the leading axis equations, conservative coefficient estimates give a
+finite, noncircular rule selecting the contraction parameter and then the
+amplitude. The resulting fixed-point map has displacement and Lipschitz
+constant at most $1/16$ on a unit ball, and its real normalized angular
+profile is at least $1/6$ on the stated interval. These are conditional
+quantitative refinements of the source's existing local argument. They do
+not select globally admissible outer data, certify the completed velocity
+field, or provide a computational complexity result.
+\end{abstract}
+
+\section{Contribution, provenance, and scope}
+The external manuscript \cite{openai} already introduces the pressure datum,
+weighted analytic space, radial inverse estimates, and local contraction.
+Our purpose is to expose sufficient constants and their order of dependence.
+In particular, this note does not claim a new blow-up theorem or a new
+fixed-point method. No priority claim is made for the general techniques.
+The source-specific estimates are candidates for a quantitative follow-up;
+a focused literature screen is not a certification of novelty.
+
+The derivations were developed in the research records listed in the
+repository's provenance manifest. This manuscript consolidates the pressure,
+coefficient, and contraction records from one fixed commit. Its mathematical
+arguments are informal. Existing AI-assisted reviews concern those records,
+not independent human peer review or a machine-checked proof of this note.
+The source manuscript is used as an external mathematical input, not
+independently certified here. Appendix labels below refer to its 166-page
+version retrieved on September 8, 2026; its checksum is recorded separately.
+
+\section{A pressure envelope on a fixed complex domain}
+Let $P_*>0$, and let $c:\mathbb R\to(0,\infty)$ and
+$\theta:\mathbb R\to[0,1]$ be measurable. Assume the envelope
+\begin{equation}\label{env}
+c(y)\le P_*\begin{cases}
+e^{y/10},&y\le 1,\\
+e^{1/10}e^{-(y-1)/2},&y\ge1.
+\end{cases}
+\end{equation}
+These assumptions isolate exactly the radial estimate needed here.
+For the source's unbumped schedule, $c'/c=l-1/2$: the inner segment has
+$l=3/5$, the first unit interval has $l\le3/5$, and subsequent segments
+have $l\le0$ at the central angular parameter. Integrating those inequalities
+gives \eqref{env}. This statement concerns the reference schedule in the
+datum (A.21), not arbitrary later edited profiles or the complete pressure.
+
+Define
+\begin{equation}\label{pressure}
+\Pi_0(z)=-\frac12\int_{\mathbb R}c(y)^2
+\exp\bigl(-2\theta(y)\operatorname{Log}(1+z^2)\bigr)\,dy,
+\quad
+\Omega=\{z:|\operatorname{Re}z|<5/4,\ |\operatorname{Im}z|<1/4\}.
+\end{equation}
+The logarithm is the principal branch.
+
+\begin{theorem}\label{thmpressure}
+Under \eqref{env}, $\Pi_0$ is holomorphic on $\Omega$. For every rational
+$\overline P\ge P_*$,
+\[
+|\Pi_0(z)|\le16\overline P^2=:P_0,
+\qquad |\Pi_0'(z)|\le128\overline P^2=:P_1
+\quad(z\in\Omega).
+\]
+\end{theorem}
+\begin{proof}
+The three intervals $(-\infty,0)$, $[0,1]$, and $[1,\infty)$ contribute
+at most $5P_*^2$, $e^{1/5}P_*^2$, and $e^{1/5}P_*^2$, respectively, to
+$\int c^2$. Since $e^{1/5}\le\sum_{k\ge0}(1/5)^k=5/4$,
+\[
+\int_{\mathbb R}c^2\le(5+2e^{1/5})P_*^2<8P_*^2.
+\]
+On $\Omega$, $\operatorname{Re}(1+z^2)>15/16$ and $|z|<3/2$.
+Consequently $f=(1+z^2)^{-1}$ satisfies $|f|<2$ and $|f'/f|<4$.
+For real $0\le\theta\le1$, the integrand's power has magnitude at most
+$4$ and its $z$ derivative has magnitude at most $32$.
+These bounds give common integrable majorants. Holomorphic integration and
+differentiation under the integral are therefore valid, and multiplication
+by the factor $1/2$ proves the two bounds.
+\end{proof}
+
+For $R\ge1$, the pressure contribution outside $[-R,R]$ is at most
+\begin{equation}\label{tail}
+10\overline P^2e^{-R/5}+3\overline P^2e^{-(R-1)}.
+\end{equation}
+The corresponding derivative tail is at most eight times this expression.
+This follows by integrating the two tails in \eqref{env} and using the
+same power bounds. For a finite schedule with computable parameters and
+effective compact-interval moduli, certified quadrature and \eqref{tail}
+give finite-accuracy pressure evaluation. Measurability and the envelope
+alone do not imply computability. No quadrature implementation or cost
+bound is asserted here.
+
+\section{Coefficient domain and explicit local data}
+Fix rational parameters
+\[
+0<h\le1/100,\quad 0<j\le1/20,\quad 0<\sigma\le1,\quad
+0\le e\le1/1000,
+\]
+and choose rational $0<r\le\min(1/1000,\sigma^2/4096)$.
+Write $I=[-1-e,1+e]$, let $\Omega_r$ be its open complex $r$-neighborhood,
+and put $\rho=r/4$. Define
+\begin{align*}
+A&=1/2+h,& D&=1/2-h,& d&=1-\eta^2,& L&=1-2h\eta^2,\\
+U_*&=4\eta+j,& H_*&=D\eta+dU_*,& Q_*&=H_*^2+\sigma^2,\\
+\chi&=H_*^2/Q_*,& \zeta&=-LH_*/Q_*.
+\end{align*}
+\[
+W_*=1-dU_*'-2D\eta U_*,\qquad
+Z_*=-A(1-2\eta U_*)U_*-H_*U_*'-d\Pi_0'+4A\eta\Pi_0.
+\]
+These are the coefficients in the source's Appendix B. The source's
+global outer admissibility and additional separation condition (B.2) are
+not established by the parameter ranges above. Those remain additional
+obligations when applying the local construction to the complete source.
+
+\begin{lemma}\label{domains}
+On $\Omega_r$ one has
+\[
+|H_*|<9,\quad |H_*'|<18,\quad 1/2<|L|<2,\quad |Q_*|\ge\sigma^2/2.
+\]
+Furthermore,
+\[
+|\chi|\le162/\sigma^2,\quad |\zeta|\le36/\sigma^2,\quad
+|Z_*/L|\le\overline Z:=192+928\overline P^2.
+\]
+\end{lemma}
+\begin{proof}
+The tube lies in $|z|<101/100$. Triangle bounds for the displayed
+polynomials give the first three inequalities and
+$|(H_*^2)'|<324$. For each $z$ in the tube there is real $x\in I$
+with $|z-x|<r$. Since $Q_*(x)\ge\sigma^2$, integration along the
+segment gives $|Q_*(z)|\ge\sigma^2-324r>\sigma^2/2$.
+This proves the bounds for $\chi$ and $\zeta$.
+For $Z_*$, use $|U_*|<5$, $|d|<3$, $|1-2zU_*|<12$,
+$|H_*U_*'|<36$, $A<1$, and $|4Az|<5$.
+It follows that $|Z_*/L|\le192+10P_0+6P_1=\overline Z$.
+The entire tube lies inside $\Omega$, so Theorem~\ref{thmpressure} applies.
+\end{proof}
+
+For $\Lambda\ge1$ set
+\[
+\phi_*(z)=\exp\left(\Lambda\int_0^z\zeta(w)\,dw\right),\qquad
+g=\phi_*/C.
+\]
+The tube is convex, the path length is less than two, and hence
+$|\phi_*|\le e^{72\Lambda/\sigma^2}$ there. In particular,
+\begin{equation}\label{Cchoice}
+C\ge2^{\lceil144\Lambda/\sigma^2\rceil}
+\quad\Longrightarrow\quad |g|\le1\text{ on }\Omega_r,
+\end{equation}
+because $\log2>1/2$. A bound on this complex domain, rather than only
+on its real interval, is needed to control coefficient derivatives.
+
+\section{The weighted space and operator constants}
+We use the source's space with the following normalization. Write
+$F(Y,\eta)=\sum_{\alpha\ge0}F_\alpha(\eta)Y^\alpha$ and put
+\[
+a_{\alpha\beta}=
+\frac{20^{-\alpha}\rho^{-\beta}\beta!\binom{\alpha+\beta}{\beta}}
+{(\alpha+1)^2(\beta+1)^2},\qquad
+\norm{F}=\sup_{\alpha,\beta\ge0,\ \eta\in I}
+\frac{|\partial_\eta^\beta F_\alpha(\eta)|}{a_{\alpha\beta}}.
+\]
+The space $B_\rho$ consists of smooth coefficient sequences with finite
+norm and is complete, by uniform convergence at every coefficient and
+derivative order. On $B_\rho^2$ use the maximum norm. Set
+\[
+\Int F=\int_0^Y F(s,\eta)\,ds,\quad \Av F=Y^{-1}\Int F,
+\quad \DY=Y\partial_Y,
+\quad (\J_\nu F)_{\alpha+1}=\frac{F_\alpha}{(\alpha+1)(\alpha+\nu)},
+\quad (\J_\nu F)_0=0.
+\]
+Here $\nu=1,2$; averaging is defined at zero by its coefficient extension.
+
+The coefficient convolution and weight shifts in Lemma B.1 give
+\begin{equation}\label{ops}
+\begin{gathered}
+a_{\rm alg}=256,\quad \|\J_\nu\|,\|\Int\|,\|Y\cdot\|\le80,
+\quad \|\partial_\eta\Int\|\le80/\rho,\quad \|\Av\|\le1,\\
+\norm{\J_\nu[(\partial_\eta F)(\DY G)]}
+\le C_{\rm mix}\norm{F}\norm{G},\qquad C_{\rm mix}=20480/\rho.
+\end{gathered}
+\end{equation}
+For completeness, the convolution constant in each index is bounded by
+$8\sum_{i\ge1}i^{-2}<16$, giving $256$ for multiplication.
+The weight ratios satisfy
+\[
+\frac{a_{\alpha\beta}}{a_{\alpha+1,\beta}}\le80,
+\qquad \frac{a_{i,k+1}}{a_{i+1,k}}\le\frac{80}{\rho}(i+1).
+\]
+For a mixed term at output radial degree $N=\alpha+1$, assign the
+raised degree to the factor carrying $\partial_\eta$. The residual factor
+after radial inversion is
+$(i+1)(\alpha-i)/[N(\alpha+\nu)]\le1$. If the radial derivative is
+omitted, replace $\alpha-i$ by one. Without the parameter derivative,
+the first weight ratio gives $80(\alpha-i)/[N(\alpha+\nu)]\le80$;
+omitting both is easier. Thus the same $C_{\rm mix}$ covers all these
+cases, including $\alpha=0$. Averaging costs no factor. Extra
+undifferentiated coefficients are handled by further convolution, each
+at cost $256$; they are not pulled through radial inversion.
+This does not assert boundedness of either unintegrated derivative alone.
+
+For an $\eta$-only function bounded by $M$ on $\Omega_r$, Cauchy estimates
+on disks of radius $r/2$ give
+\[
+\norm{a}\le M\sup_{\beta\ge0}\frac{(\beta+1)^2}{2^\beta}\le3M.
+\]
+Consequently multiplication by $\chi$ has norm at most
+$M_\chi=124416/\sigma^2$. If $T_\chi=\J_2\chi/2$, where multiplication
+precedes integration, its radial degree increases at every application.
+The sharper bound on inputs with no degree below $b$ is
+$\|\J_2F\|\le80\|F\|/[(b+1)(b+2)]$, so
+\[
+\|T_\chi^k\|\le\frac{(40M_\chi)^k}{k!(k+1)!},\qquad
+\|(1+T_\chi)^{-1}\|\le e^{40M_\chi}\le V:=2^{\lceil80M_\chi\rceil}.
+\]
+The inverse follows from the absolutely convergent alternating operator
+series. It does not require $\|T_\chi\|<1$.
+
+\section{Integrated remainders and a contraction rule}
+Set
+\begin{equation}\label{constants}
+\begin{gathered}
+K=\max(V,120\overline Z)+1,\qquad B_c=1000/\sigma^2,\\
+T=a_{\rm alg}B_c C_{\rm mix},\qquad
+P_c=57600a_{\rm alg}^4B_c(2+1/\rho),\\
+N=T(6K+11K^2)+P_cK^2,\qquad
+L_R=T(6+22K)+2P_cK.
+\end{gathered}
+\end{equation}
+All these constants are fixed before $\Lambda$ and $C$.
+The center is
+\[
+\Phi_0=f_0(Y\chi),\quad u_0=-YZ_*/(2L),\qquad
+f_0(z)=\sum_{\alpha\ge0}\frac{(-z/2)^\alpha}{\alpha!(\alpha+1)!}.
+\]
+Its component norms are at most $V$ and $120\overline Z$, respectively,
+so the closed unit ball about it has both component norms at most $K$.
+
+Write $\varepsilon=\Lambda^{-1}$ and define
+\[
+B=-2D\eta\Av u-d\partial_\eta\Av u,\quad
+W=W_*+\varepsilon B,\quad U=U_*+\varepsilon u,\quad
+H_c=H_*+\varepsilon du,\quad p=\Int(g^2\Phi^2).
+\]
+The source remainders, with their full derivative dependence, are
+\begin{align}
+LR_1={}&[W+h(1-2\eta U)+du\zeta]\Phi+W\DY\Phi+H_c\partial_\eta\Phi,
+\label{r1}\\
+LR_2={}&[A(1-4\eta U_*)+dU_*']u-2A\eta\varepsilon u^2
++W\DY u+H_*\partial_\eta u+\varepsilon du\partial_\eta u\notag\\
+&\hspace{8mm}-4A\eta p+d\partial_\eta p-2\eta\DY p.\label{r2}
+\end{align}
+Expanding these expressions gives three linear and seven quadratic
+nonpressure terms in $R_1$, and three linear, four quadratic, and three
+pressure terms in $R_2$. Appendix~\ref{terms} lists them individually.
+
+Every $\eta$-only coefficient in that list, including its division by $L$,
+has norm at most $B_c$. For example $|W_*|<19$ on the tube, and
+$\norm{d\zeta/L}\le648/\sigma^2$. The axial linear coefficient before
+division by $L$ has magnitude below $34$; Cauchy conversion bounds its
+norm after division by $204<210$. The other coefficients obey smaller
+bounds by Lemma~\ref{domains}. After applying the indicated $\J_\nu$,
+\eqref{ops} therefore gives $TK$ per nonpressure linear term and $TK^2$
+per quadratic term. The powers of $\varepsilon$ are at most one.
+
+By \eqref{Cchoice}, $\norm{g}\le3$. For one fixed $g$ per contraction,
+four-factor multiplication gives
+\[
+\norm{g^2\Phi^2}\le9a_{\rm alg}^3K^2,\qquad
+\norm{g^2(\Phi^2-\Psi^2)}\le18a_{\rm alg}^3K\norm{\Phi-\Psi}.
+\]
+The operators generating $p$, $\partial_\eta p$, and $\DY p$ from
+$g^2\Phi^2$ are $\Int$, $\partial_\eta\Int$, and multiplication by $Y$.
+Applying these first, then coefficient multiplication and the outer
+$\J_\nu$, gives the total pressure bound
+$80\cdot80\cdot9a_{\rm alg}^4B_c(2+1/\rho)K^2=P_cK^2$.
+Replacing the two unknown factors one at a time gives its difference
+bound $2P_cK$ times the input difference.
+Summing both component bounds proves that $N$ and $L_R$ in
+\eqref{constants} bound the norm and Lipschitz constant of
+$(\J_2R_1,\J_1R_2)$ on the unit ball.
+
+\begin{theorem}\label{contraction}
+For the local data and pressure above, choose an integer
+\[
+\Lambda\ge\max\{1,\lceil8V(N+L_R+1)\rceil\},
+\]
+and then choose $C$ satisfying \eqref{Cchoice}.
+The map
+\[
+\mathcal F(\Phi,u)=\left(
+\Phi_0+\frac{(1+T_\chi)^{-1}\J_2R_1}{2\Lambda},\quad
+u_0+\frac{\J_1R_2}{2\Lambda}\right)
+\]
+maps the closed unit ball about $(\Phi_0,u_0)$ into itself and has
+Lipschitz constant at most $1/16$. Its unique fixed point in that ball
+has distance at most $1/16$ from the center. On $0\le Y\le41/10$,
+$\eta\in I$, its real angular component satisfies $\Phi\ge1/6$.
+\end{theorem}
+\begin{proof}
+The map's displacement and Lipschitz constant are bounded by
+$VN/(2\Lambda)$ and $VL_R/(2\Lambda)$, respectively, each at most
+$1/16$. Banach's theorem applies on the complete closed ball.
+Although $g$ depends on the later choices, its common norm bound follows
+from the same larger complex domain for every allowed pair $(\Lambda,C)$.
+Thus selecting $\Lambda$ using these constants is noncircular.
+
+The radial-zero conditions $\Phi(0,\eta)=1$ and $u(0,\eta)=0$ are preserved:
+both radial inverses have zero constant coefficient, and the angular
+inverse preserves this subspace term by term. Real data and iteration from
+the real center give real coefficients.
+For $\beta=0$, the weights imply
+$|F(Y,\eta)|\le\norm{F}/(1-|Y|/20)$, whose factor is below $4/3$
+on the stated interval. Also $0\le\chi\le1$ on $I$.
+The alternating series for $f_0$ gives, with $t=z/2$,
+\[
+f_0(z)\ge1-t/2+t^2/12-t^3/144\ge305719/1152000>1/4
+\quad(0\le z\le41/10).
+\]
+The cubic is decreasing on $[0,41/20]$; the remaining alternating
+tail starts positively with decreasing magnitudes. Therefore
+$\Phi\ge1/4-(4/3)(1/16)=1/6$.
+\end{proof}
+
+The coefficient binomial sum also gives convergence on $|Y|\le5$ with
+complex $\eta$ displacement less than $\rho/4$ from the real interval.
+Indeed the geometric factors have sum at most $1/4+1/4<1$ before
+the polynomial weight denominators are used. In the original radial
+variable this establishes a leading local profile on
+$0\le X\le41/(10\Lambda)$. It does not establish the source's later
+continuation or endpoint shear inequalities.
+
+\section{Effectivity, verification, and remaining obligations}
+Exact Picard iterates starting at the center have first displacement at
+most $1/16$ and successive increments bounded by powers of $1/16$.
+After $m$ iterations the norm error is at most
+$(1/16)^{m+1}/(1-1/16)$. This is a bound for exact analytic iterates.
+Finite coefficient truncations need not converge in the full weighted
+supremum norm: their tails can continue to attain that norm.
+On smaller compact analytic domains, the coefficient envelope instead
+gives effective value and fixed-derivative tails. With effective pressure
+and parameter data this supports finite-accuracy local evaluation in
+principle; an implementation must account for arithmetic error, coefficient
+access, and both truncation and iteration errors.
+
+The constants are deliberately loose. Writing a power of two as an
+expression is distinct from writing its full binary expansion, and the
+number of exact Picard steps is distinct from the work needed to evaluate
+each step. Neither a polynomial bit-time bound nor an implemented certified
+local solver is provided.
+
+The companion exact-rational script checks elementary numerical
+inequalities used in these estimates. It is not a formal proof of the
+analytic argument. The archived reviews separately address source
+alignment and the conditional claims; the consolidated manuscript has
+not received independent human peer review.
+
+To obtain a certified completed field one would still need globally
+admissible outer parameters, the source's separation and continuation
+conditions, higher-order corrections, and normalized cutoff-tail bounds.
+Theorems~\ref{thmpressure} and \ref{contraction} do not discharge those
+obligations. They also do not construct logic, memory, a readable fluid
+device, or a SAT algorithm. The intended contribution is the explicit
+local certificate and its auditable dependence on the stated inputs.
+
+\appendix
+\section{Expanded remainder inventory}\label{terms}
+Each coefficient below includes division by $L$. A dash in the last
+column means a multiplier of one. This inventory fixes the term counts
+used in \eqref{constants}.
+\begin{center}\small
+\begin{tabular}{lll}
+\toprule Coefficient in $R_1$ & Unknown factors & Multiplier\\\midrule
+$(W_*+h(1-2\eta U_*))/L$ & $\Phi$ & --\\
+$d\zeta/L$ & $u\Phi$ & --\\
+$W_*/L$ & $\DY\Phi$ & --\\
+$H_*/L$ & $\partial_\eta\Phi$ & --\\
+$-2D\eta/L$ & $(\Av u)\Phi$ & $\varepsilon$\\
+$-d/L$ & $(\partial_\eta\Av u)\Phi$ & $\varepsilon$\\
+$-2h\eta/L$ & $u\Phi$ & $\varepsilon$\\
+$-2D\eta/L$ & $(\Av u)\DY\Phi$ & $\varepsilon$\\
+$-d/L$ & $(\partial_\eta\Av u)\DY\Phi$ & $\varepsilon$\\
+$d/L$ & $u\partial_\eta\Phi$ & $\varepsilon$\\\bottomrule
+\end{tabular}
+\end{center}
+\begin{center}\small
+\begin{tabular}{lll}
+\toprule Coefficient in $R_2$ & Unknown expression & Multiplier\\\midrule
+$[A(1-4\eta U_*)+dU_*']/L$ & $u$ & --\\
+$W_*/L$ & $\DY u$ & --\\
+$H_*/L$ & $\partial_\eta u$ & --\\
+$-2A\eta/L$ & $u^2$ & $\varepsilon$\\
+$-2D\eta/L$ & $(\Av u)\DY u$ & $\varepsilon$\\
+$-d/L$ & $(\partial_\eta\Av u)\DY u$ & $\varepsilon$\\
+$d/L$ & $u\partial_\eta u$ & $\varepsilon$\\
+$-4A\eta/L$ & $p$ & --\\
+$d/L$ & $\partial_\eta p$ & --\\
+$-2\eta/L$ & $\DY p$ & --\\\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Author and assistance disclosure}
+Daniel Fredriksen directed the research and publication preparation.
+OpenAI Codex assisted with derivations, internal reviews, consolidation,
+and repository preparation. AI-assisted checks are not human peer review;
+author responsibility and source attribution remain explicit.
+
+\begin{thebibliography}{9}
+\bibitem{openai} OpenAI. \emph{Finite time blowup for Navier--Stokes}.
+September 2026 manuscript, 166 pages. Appendix A.2--A.4, especially
+(A.21), and Appendix B.1--B.3, especially (B.4)--(B.16).
+\href{https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf}{Source PDF}.
+Retrieved September 8, 2026. Exact downloaded-file checksum and derivation
+provenance appear in the companion repository.
+\bibitem{companion} Daniel Fredriksen.
+\emph{Navier--Stokes effective bounds: companion sources and verification}.
+\url{https://github.com/Quantyra/navier-stokes-effective-bounds}.
+\end{thebibliography}
+\end{document}

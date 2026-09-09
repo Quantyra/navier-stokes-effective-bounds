@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Please cite this research note using the metadata below. A Zenodo DOI will be added after publication."
+type: software
+title: "Explicit Pressure and Local Contraction Bounds for a Forced Navier–Stokes Blow-Up Construction"
+authors:
+  - family-names: Fredriksen
+    given-names: Daniel
+    affiliation: Quantyra
+version: 0.1.0
+date-released: 2026-09-08
+url: "https://github.com/Quantyra/navier-stokes-effective-bounds"
+repository-code: "https://github.com/Quantyra/navier-stokes-effective-bounds"
+license: Apache-2.0
+preferred-citation:
+  type: article
+  title: "Explicit Pressure and Local Contraction Bounds for a Forced Navier–Stokes Blow-Up Construction"
+  authors:
+    - family-names: Fredriksen
+      given-names: Daniel
+      affiliation: Quantyra
+  year: 2026
+  month: 9
+  url: "https://github.com/Quantyra/navier-stokes-effective-bounds/blob/main/output/pdf/effective-bounds.pdf"
+keywords:
+  - Navier-Stokes
+  - explicit estimates
+  - analytic coefficient spaces
+  - contraction mapping

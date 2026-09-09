@@ -1,0 +1,48 @@
+{
+  "source_repository": "https://github.com/Quantyra/formal-pvnp",
+  "source_commit": "8df8582cf7fa34a7eaa92787bd73fd3998b0ccf8",
+  "files": [
+    {
+      "path": "evidence/2026-09-08-pressure-effectivity-attempt.md",
+      "source_path": "research/p-equals-np/2026-09-08-pressure-effectivity-attempt.md",
+      "sha256": "8bc00fcf7e8d184803bc342d7237eec77c90b6c795479bdfbd0f93fe6e004978"
+    },
+    {
+      "path": "evidence/2026-09-08-source-certificate-attempt.md",
+      "source_path": "research/p-equals-np/2026-09-08-source-certificate-attempt.md",
+      "sha256": "a7eaf9e76b3d662b0dd518522da2a2229caf3b1df32792f8e2c76a5dd4c4a1d9"
+    },
+    {
+      "path": "evidence/2026-09-08-axis-contraction-effectivity-attempt.md",
+      "source_path": "research/p-equals-np/2026-09-08-axis-contraction-effectivity-attempt.md",
+      "sha256": "f7fbefa57044b083bac2dbf6ef80071be458c231bc87e1a5926aae630de271f9"
+    },
+    {
+      "path": "evidence/2026-09-08-pressure-proof-and-claims-review.md",
+      "source_path": "research/p-equals-np/2026-09-08-pressure-proof-and-claims-review.md",
+      "sha256": "2ab29d7f0c6aa6079a197476e86fbf9916949cd4efa3c53516c5e02c7dba578b"
+    },
+    {
+      "path": "evidence/2026-09-08-pressure-source-review.md",
+      "source_path": "research/p-equals-np/2026-09-08-pressure-source-review.md",
+      "sha256": "79f351e3644f53fb96ea07e0b321b9c1c581f48477ed98071bc933ecf0945009"
+    },
+    {
+      "path": "evidence/2026-09-08-axis-contraction-proof-and-claims-review.md",
+      "source_path": "research/p-equals-np/2026-09-08-axis-contraction-proof-and-claims-review.md",
+      "sha256": "b71a0596f5db73e8f0afe04c90e87aa05dd7dc4e38f1b44824a00788fd3d97d5"
+    },
+    {
+      "path": "evidence/2026-09-08-axis-contraction-source-review.md",
+      "source_path": "research/p-equals-np/2026-09-08-axis-contraction-source-review.md",
+      "sha256": "58134b80043c5855f7a93c22eb16c3f1606a44cef81909be6a8c8410ee68e426"
+    }
+  ],
+  "external_manuscript": {
+    "url": "https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf",
+    "retrieved": "2026-09-08",
+    "sha256": "0e779481c4da40bd28d1e642e1d8ca57447d129610df28dfa5a11e9af8ae228f",
+    "bytes": 2959204,
+    "redistributed": false
+  }
+}

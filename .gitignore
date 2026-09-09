@@ -1,0 +1,6 @@
+/tmp/
+*.aux
+*.log
+*.out
+*.toc
+__pycache__/
